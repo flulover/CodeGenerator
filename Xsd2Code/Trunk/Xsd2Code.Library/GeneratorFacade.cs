@@ -173,6 +173,7 @@ namespace Xsd2Code.Library
                     {
                         var codeGeneratorOptions = new CodeGeneratorOptions();
                         codeGeneratorOptions.BracingStyle = "C";
+                        codeGeneratorOptions.BlankLinesBetweenMembers = true;
                         this.providerField.GenerateCodeFromNamespace(ns, outputStream, codeGeneratorOptions);
                     }
                 }
