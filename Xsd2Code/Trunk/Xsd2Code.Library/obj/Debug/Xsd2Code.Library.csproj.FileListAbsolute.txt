@@ -1,0 +1,7 @@
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Library\bin\Debug\Xsd2Code.Library.dll
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Library\bin\Debug\Xsd2Code.Library.pdb
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.Properties.Resources.resources
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.csproj.GenerateResource.Cache
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.dll
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.pdb
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Library\obj\Debug\Xsd2Code.Library.csprojResolveAssemblyReference.cache

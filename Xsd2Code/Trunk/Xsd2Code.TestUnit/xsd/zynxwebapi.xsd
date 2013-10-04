@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://namespace.zynx.com/2012/cdss/v1" xmlns:tns="http://namespace.zynx.com/2012/cdss/v1" targetNamespace="http://namespace.zynx.com/2012/cdss/v1" elementFormDefault="qualified" version="0.5.dev">
+  <xs:element name="PerformanceMeasure" type="PerformanceMeasure"/>
+  <xs:complexType name="PerformanceMeasure">
+    <xs:annotation>
+      <xs:documentation>Quality Measure impacted by the referencing item.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The Zynx performance measure ID.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GroupName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The performance measure group name.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

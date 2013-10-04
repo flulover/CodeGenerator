@@ -1,0 +1,1 @@
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.CustomTool\obj\Debug\Xsd2Code.CustomTool.csprojResolveAssemblyReference.cache

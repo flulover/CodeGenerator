@@ -1,0 +1,12 @@
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\bin\Xsd2Code.AddIn.AddIn
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\bin\Xsd2Code.Addin.dll
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\bin\Xsd2Code.Addin.pdb
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\bin\Xsd2Code.Library.dll
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\bin\Xsd2Code.Library.pdb
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\obj\Debug\Xsd2Code.Addin.csprojResolveAssemblyReference.cache
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\obj\Debug\Xsd2Code.Addin.csproj.ResolveComReference.cache
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\obj\Debug\Xsd2Code.Addin.CommandBar.resources
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\obj\Debug\Xsd2Code.Addin.FormOption.resources
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\obj\Debug\Xsd2Code.Addin.csproj.GenerateResource.Cache
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\obj\Debug\Xsd2Code.Addin.dll
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\Xsd2Code.Addin\obj\Debug\Xsd2Code.Addin.pdb
