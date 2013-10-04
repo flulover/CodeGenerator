@@ -298,6 +298,7 @@ namespace Xsd2Code.Library.Extensions
             ShouldSerializeFields.Clear();
             MemberFieldsListFields.Clear();
             PropertiesListFields.Clear();
+            type.IsPartial = false;
 
             // Inherits from EntityBase
             if (GeneratorContext.GeneratorParams.GenericBaseClass.Enabled && type.BaseTypes.Count == 0)
