@@ -412,7 +412,6 @@ namespace Xsd2Code.TestUnit
 
                 // Get the code namespace for the schema.
                 string inputFilePath = GetInputFilePath("zynxwebapi", Resources.Gender);
-
                 var generatorParams = GetGeneratorParams(inputFilePath);
                 generatorParams.TargetFramework = TargetFramework.Net40;
                 generatorParams.PropertyParams.AutomaticProperties = true;
