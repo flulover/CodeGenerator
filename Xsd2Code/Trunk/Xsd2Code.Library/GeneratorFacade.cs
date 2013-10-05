@@ -218,7 +218,7 @@ namespace Xsd2Code.Library
 
                 foreach (CodeTypeDeclaration type in ns.Types)
                 {
-                    using (var outputStream = new StreamWriter(type.Name + ".cs", false))
+                    using (var outputStream = new StreamWriter(type.Name + providerField.FileExtension, false))
                     {
 
 

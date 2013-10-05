@@ -426,6 +426,7 @@ namespace Xsd2Code.TestUnit
                 generatorParams.Miscellaneous.HidePrivateFieldInIde = false;
                 generatorParams.TrackingChanges.Enabled = false;
                 generatorParams.EnableDataBinding = false;
+                generatorParams.Language = GenerationLanguage.Groovy;
 
                 var xsdGen = new GeneratorFacade(generatorParams);
 
@@ -433,16 +434,16 @@ namespace Xsd2Code.TestUnit
 
                 Assert.IsTrue(result.Success, result.Messages.ToString());
 
-                var genderRoot = new Root
-                                     {
-                                         GenderAttribute = ksgender.female,
-                                         GenderAttributeSpecified = true,
-                                         GenderElement = ksgender.female,
-                                         GenderIntAttribute = "toto"
-                                     };
-                Exception ex;
-                genderRoot.SaveToFile(Path.Combine(OutputFolder, "gender.xml"), out ex);
-                if (ex != null) throw ex;
+//                var genderRoot = new Root
+//                                     {
+//                                         GenderAttribute = ksgender.female,
+//                                         GenderAttributeSpecified = true,
+//                                         GenderElement = ksgender.female,
+//                                         GenderIntAttribute = "toto"
+//                                     };
+//                Exception ex;
+//                genderRoot.SaveToFile(Path.Combine(OutputFolder, "gender.xml"), out ex);
+//                if (ex != null) throw ex;
 
 //                var canCompile = CompileCSFile(generatorParams.OutputFilePath);
 //                Assert.IsTrue(canCompile.Success, canCompile.Messages.ToString());
