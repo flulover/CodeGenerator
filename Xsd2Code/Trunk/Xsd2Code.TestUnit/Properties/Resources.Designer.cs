@@ -150,12 +150,10 @@ namespace Xsd2Code.TestUnit.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns=&quot;http://namespace.zynx.com/2012/cdss/v1&quot; xmlns:tns=&quot;http://namespace.zynx.com/2012/cdss/v1&quot; targetNamespace=&quot;http://namespace.zynx.com/2012/cdss/v1&quot; elementFormDefault=&quot;qualified&quot; version=&quot;0.5.dev&quot;&gt;
-        ///	&lt;xs:element name=&quot;AppliedDataTemplate&quot; type=&quot;AppliedDataTemplate&quot;/&gt;
-        ///	&lt;xs:complexType name=&quot;AppliedDataTemplate&quot;&gt;
-        ///		&lt;xs:complexContent&gt;
-        ///			&lt;xs:extension base=&quot;CdssEntity&quot;&gt;
-        ///				&lt;xs:sequence&gt;
-        ///					&lt;xs:element [rest of string was truncated]&quot;;.
+        ///  &lt;xs:element name=&quot;PerformanceMeasure&quot; type=&quot;PerformanceMeasure&quot;/&gt;
+        ///  &lt;xs:complexType name=&quot;PerformanceMeasure&quot;&gt;
+        ///    &lt;xs:annotation&gt;
+        ///      &lt;xs:documentation&gt;Quality Measure impacted by the referencing item.&lt;/ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Gender {
             get {

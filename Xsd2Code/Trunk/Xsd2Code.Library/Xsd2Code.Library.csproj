@@ -139,6 +139,9 @@
     <Compile Include="GeneratorParamsTypes.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GroovyCodeDomProvider.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +183,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

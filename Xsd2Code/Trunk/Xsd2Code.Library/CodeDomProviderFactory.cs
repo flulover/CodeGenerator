@@ -37,9 +37,10 @@ namespace Xsd2Code.Library
             {
                 case GenerationLanguage.CSharp:
                     return new CSharpCodeProvider();
-
                 case GenerationLanguage.VisualBasic:
                     return new VBCodeProvider();
+                case GenerationLanguage.Groovy:
+                    return new GroovyCodeProvider();
 
                 default:
                     throw new NotImplementedException(string.Format("Code provider for language {0} is not supported", Utility.GetEnumDescription(language)));

@@ -33,7 +33,8 @@ namespace Xsd2Code.Library.Helpers
 
                 case GenerationLanguage.VisualBasic:
                     return new VBCodeProvider();
-
+                case GenerationLanguage.Groovy:
+                    return new GroovyCodeProvider();
                 default:
                     throw new NotImplementedException(
                         string.Format(Properties.Resources.UnsupportedLanguageCodeDomProvider, Utility.GetEnumDescription(language)));

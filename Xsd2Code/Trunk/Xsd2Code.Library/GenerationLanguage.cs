@@ -26,6 +26,12 @@ namespace Xsd2Code.Library
         /// Visual Basic language
         /// </summary>
         [Description("Visual Basic")]
-        VisualBasic
+        VisualBasic,
+
+        /// <summary>
+        /// Groovy language
+        /// </summary>
+        [Description("Groovy")]
+        Groovy
     }
 }
