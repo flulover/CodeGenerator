@@ -20,10 +20,11 @@ namespace Xsd2Code.Library
                         var field = new CodeMemberField();
                         field.Name = prop.Name;
                         field.Type = prop.Type;
+                        field.Attributes = MemberAttributes.Public;
                         classType.Members.Add(field);
                     }
-                } 
-            
+                }
+                options.BlankLinesBetweenMembers = false;
                 GenerateCodeFromType(classType, writer, options);
             }
         }
