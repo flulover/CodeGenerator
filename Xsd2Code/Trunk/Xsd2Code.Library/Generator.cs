@@ -82,31 +82,14 @@ namespace Xsd2Code.Library
             return Process(generatorParams);
         }
 
-        /// <summary>
-        /// Initiate code generation process
-        /// </summary>
-        /// <param name="generatorParams">Generator parameters</param>
-        /// <returns></returns>
-        internal static Result<CodeNamespace> Process(GeneratorParams generatorParams)
+        public static void Process(string inputFilePath, ref XmlSchema xsd, ref CodeNamespace ns)
         {
-            var ns = new CodeNamespace();
-
+            ns = new CodeNamespace();
             XmlReader reader = null;
             try
             {
-
-                #region Set generation context
-
-                GeneratorContext.GeneratorParams = generatorParams;
-
-                #endregion
-
-                #region Get XmlTypeMapping
-
-                XmlSchema xsd;
                 var schemas = new XmlSchemas();
-
-                reader = XmlReader.Create(generatorParams.InputFilePath);
+                reader = XmlReader.Create(inputFilePath);
                 xsd = XmlSchema.Read(reader, new ValidationEventHandler(Validate));
 
                 var schemaSet = new XmlSchemaSet();
@@ -134,6 +117,40 @@ namespace Xsd2Code.Library
                     var mapping = importer.ImportSchemaType(complex.QualifiedName);
                     exporter.ExportTypeMapping(mapping);
                 }
+            }
+            catch (Exception)
+            {
+                
+                
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
+            
+        }
+
+        /// <summary>
+        /// Initiate code generation process
+        /// </summary>
+        /// <param name="generatorParams">Generator parameters</param>
+        /// <returns></returns>
+        internal static Result<CodeNamespace> Process(GeneratorParams generatorParams)
+        {
+            CodeNamespace ns = null;
+            try
+            {
+                #region Set generation context
+
+                GeneratorContext.GeneratorParams = generatorParams;
+
+                #endregion
+
+                XmlSchema xsd = null;
+                #region Get XmlTypeMapping
+
+                Process(generatorParams.InputFilePath, ref xsd, ref ns);
 
                 #endregion
 
@@ -152,11 +169,6 @@ namespace Xsd2Code.Library
             catch (Exception e)
             {
                 return new Result<CodeNamespace>(ns, false, e.Message, MessageType.Error);
-            }
-            finally
-            {
-                if (reader != null)
-                    reader.Close();
             }
         }
 

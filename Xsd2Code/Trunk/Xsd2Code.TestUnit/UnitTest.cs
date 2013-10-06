@@ -426,7 +426,7 @@ namespace Xsd2Code.TestUnit
                 generatorParams.Miscellaneous.HidePrivateFieldInIde = false;
                 generatorParams.TrackingChanges.Enabled = false;
                 generatorParams.EnableDataBinding = false;
-                generatorParams.Language = GenerationLanguage.CSharp;
+                generatorParams.Language = GenerationLanguage.Groovy;
 
                 var xsdGen = new GeneratorFacade(generatorParams);
 
