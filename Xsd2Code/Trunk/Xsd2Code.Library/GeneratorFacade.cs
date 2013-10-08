@@ -8,6 +8,7 @@ using System.IO.Packaging;
 using System.Reflection;
 using System.Xml.Schema;
 using Xsd2Code.Library.Helpers;
+using Xsd2Code.Library.Properties;
 
 namespace Xsd2Code.Library
 {
@@ -173,15 +174,15 @@ namespace Xsd2Code.Library
                     // Entity class
                     var result = Generator.Process(GeneratorContext.GeneratorParams);
                     if (!result.Success) return result;
-                    GenerateEntityCode(result.Entity);
+                    GenerateEntityCSharpCode(result.Entity);
 
                     // Entity builder class
                     CodeNamespace ns = null;
                     XmlSchema xsd = null;
                     Generator.Process(GeneratorParams.InputFilePath, ref xsd, ref ns);
-                    GenerateEntityBuilderCode(ns);
-                    GenerateGroovyEntityCode(ns);
-                    GenerateGroovyEntityBuilderCode(ns);
+                    GenerateEntityBuilderCSharpCode(ns);
+                    GenerateEntityGroovyCode(ns);
+                    GenerateEntityBuilderGroovyCode(ns);
                 }
                 catch (Exception e)
                 {
@@ -205,18 +206,68 @@ namespace Xsd2Code.Library
             return new Result(true);
         }
 
-        // TODO groovy code staff, use T4?
-        private void GenerateGroovyEntityBuilderCode(CodeNamespace ns)
+
+        private void GenerateEntityGroovyCode(CodeNamespace ns)
         {
-            throw new NotImplementedException();
+            foreach (CodeTypeDeclaration type in ns.Types)
+            {
+                string literalCode = Resources.EntityGroovy_cs;
+                
+                using (var outputStream = new StreamWriter(type.Name + ".groovy", false))
+                {
+                    literalCode = literalCode.Replace(CodeTemplateSectionName.ClassName, type.Name);
+                    string fieldsCode = string.Empty;
+                    foreach (CodeTypeMember codeTypeMember in type.Members)
+                    {
+                        var prop = codeTypeMember as CodeMemberProperty;
+                        if (prop != null)
+                        {
+                            string fieldCode = Resources.EntityFieldGroovy_cs;
+                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldType, CSharpTypeToGroovyType.GetType(prop.Type.BaseType));
+                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldName, prop.Name);
+                            fieldsCode += fieldCode;
+                        }
+                    }
+
+                    literalCode = literalCode.Replace(CodeTemplateSectionName.Fields, fieldsCode);
+
+                    CodeSnippetCompileUnit cu = new CodeSnippetCompileUnit(literalCode);
+                    providerField.GenerateCodeFromCompileUnit(cu, outputStream, new CodeGeneratorOptions());
+                }
+            }
         }
 
-        private void GenerateGroovyEntityCode(CodeNamespace ns)
+        private void GenerateEntityBuilderGroovyCode(CodeNamespace ns)
         {
-            throw new NotImplementedException();
+            foreach (CodeTypeDeclaration type in ns.Types)
+            {
+                string literalCode = Resources.EntityBuilderGroovy_cs;
+
+                using (var outputStream = new StreamWriter(type.Name + "Builder.groovy", false))
+                {
+                    literalCode = literalCode.Replace(CodeTemplateSectionName.ClassName, type.Name);
+                    string withFunctionCode = string.Empty;
+                    foreach (CodeTypeMember codeTypeMember in type.Members)
+                    {
+                        var prop = codeTypeMember as CodeMemberProperty;
+                        if (prop != null)
+                        {
+                            string fieldCode = Resources.EntityBuilderFunctionGroovy_cs;
+                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldType, CSharpTypeToGroovyType.GetType(prop.Type.BaseType));
+                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldName, prop.Name);
+                            withFunctionCode += fieldCode;
+                        }
+                    }
+
+                    literalCode = literalCode.Replace(CodeTemplateSectionName.FieldsFunction, withFunctionCode);
+
+                    CodeSnippetCompileUnit cu = new CodeSnippetCompileUnit(literalCode);
+                    providerField.GenerateCodeFromCompileUnit(cu, outputStream, new CodeGeneratorOptions());
+                }
+            }
         }
 
-        private void GenerateEntityCode(CodeNamespace ns)
+        private void GenerateEntityCSharpCode(CodeNamespace ns)
         {
             foreach (CodeTypeDeclaration type in ns.Types)
             {
@@ -231,7 +282,6 @@ namespace Xsd2Code.Library
                     tmpNs.Types.Add(type);
                     var codeGeneratorOptions = new CodeGeneratorOptions();
                     codeGeneratorOptions.BracingStyle = "C";
-                    codeGeneratorOptions.BlankLinesBetweenMembers = true;
                     providerField.GenerateCodeFromNamespace(tmpNs, outputStream, codeGeneratorOptions);
                 }
             }
@@ -242,7 +292,7 @@ namespace Xsd2Code.Library
             return entityName + "Builder";
         }
 
-        private void GenerateEntityBuilderCode(CodeNamespace ns)
+        private void GenerateEntityBuilderCSharpCode(CodeNamespace ns)
         {
             foreach (CodeTypeDeclaration type in ns.Types)
             {
@@ -265,10 +315,18 @@ namespace Xsd2Code.Library
 
                     // Builder class field
                     var entityField = new CodeMemberField(type.Name, type.Name);
-                    entityField.Attributes = MemberAttributes.Private;
+                    entityField.Attributes = MemberAttributes.Private | MemberAttributes.Const;
                     builderType.Members.Add(entityField);
 
                     builderNs.Types.Add(builderType);
+
+                    // Builder constructor
+                    var constructor = new CodeConstructor();
+                    constructor.Statements.Add(new CodeAssignStatement(
+                        new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), type.Name),
+                        new CodeObjectCreateExpression(new CodeTypeReference(type.Name), new CodeExpression[] { })));
+                    constructor.Attributes = MemberAttributes.Public;
+                    builderType.Members.Add(constructor);
 
                     // Builder class method
                     foreach (CodeTypeMember codeTypeMember in type.Members)
@@ -280,7 +338,7 @@ namespace Xsd2Code.Library
                             method.Attributes = MemberAttributes.Public | MemberAttributes.Final;
                             method.Name = "With" + prop.Name;
                             method.ReturnType = new CodeTypeReference(builderType.Name);
-                            method.Parameters.Add(new CodeParameterDeclarationExpression(prop.Name, prop.Name));
+                            method.Parameters.Add(new CodeParameterDeclarationExpression(prop.Type, prop.Name));
                             method.Statements.Add(
                                 new CodeAssignStatement(
                                     new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), prop.Name),
@@ -302,7 +360,6 @@ namespace Xsd2Code.Library
 
                     var codeGeneratorOptions = new CodeGeneratorOptions();
                     codeGeneratorOptions.BracingStyle = "C";
-                    codeGeneratorOptions.BlankLinesBetweenMembers = true;
                     providerField.GenerateCodeFromNamespace(builderNs, outputStream, codeGeneratorOptions);
                 }
             }

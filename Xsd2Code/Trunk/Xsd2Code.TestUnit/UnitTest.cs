@@ -427,6 +427,7 @@ namespace Xsd2Code.TestUnit
                 generatorParams.TrackingChanges.Enabled = false;
                 generatorParams.EnableDataBinding = false;
                 generatorParams.Language = GenerationLanguage.CSharp;
+                generatorParams.NameSpace = "Cdss.Domain.Entities";
 
                 var xsdGen = new GeneratorFacade(generatorParams);
 
@@ -792,7 +793,7 @@ namespace Xsd2Code.TestUnit
             var generatorParams = new GeneratorParams
                        {
                            InputFilePath = inputFilePath,
-                           NameSpace = CodeGenerationNamespace,
+                           //NameSpace = CodeGenerationNamespace,
                            TargetFramework = TargetFramework.Net20,
                            CollectionObjectType = CollectionType.ObservableCollection,
                            EnableDataBinding = true,

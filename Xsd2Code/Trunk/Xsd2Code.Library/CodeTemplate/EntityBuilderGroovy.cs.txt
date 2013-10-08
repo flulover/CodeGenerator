@@ -1,0 +1,15 @@
+﻿package common.builders.orderSet
+
+import common.builders.EntityListBuilderBase
+import common.entities.orderSet.[ClassName]
+
+class [ClassName]Builder extends EntityListBuilderBase{
+
+	[ClassName]Builder(){
+		entity = new [ClassName]()
+	}
+
+[FieldsFunction]	public def build(){
+		entity
+	}
+}

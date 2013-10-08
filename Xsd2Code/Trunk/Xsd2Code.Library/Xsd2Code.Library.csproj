@@ -125,6 +125,10 @@
     </Compile>
     <Compile Include="CodeBase.cs" />
     <Compile Include="CodeDomProviderFactory.cs" />
+    <None Include="CodeTemplate\EntityGroovy.cs.txt" />
+    <None Include="CodeTemplate\EntityFieldGroovy.cs.txt" />
+    <None Include="CodeTemplate\EntityBuilderFunctionGroovy.cs.txt" />
+    <None Include="CodeTemplate\EntityBuilderGroovy.cs.txt" />
     <Content Include="CodeTemplate\PropertyValueState.cs.txt" />
     <Content Include="CodeTemplate\ObjectStateChangingEventArgs.cs.txt" />
     <Compile Include="Extensions\CodeExtension.cs" />
@@ -142,6 +146,8 @@
     <Compile Include="GroovyCodeDomProvider.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Helpers\CodeTemplateSectionName.cs" />
+    <Compile Include="Helpers\CSharpTypeToGroovyType.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

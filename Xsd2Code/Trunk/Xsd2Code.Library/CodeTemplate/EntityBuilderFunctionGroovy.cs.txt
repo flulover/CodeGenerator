@@ -1,0 +1,5 @@
+﻿	public def with[FieldName]([FieldType] [FieldName]){
+		entity.[FieldName] = [FieldName]
+		this
+	}
+

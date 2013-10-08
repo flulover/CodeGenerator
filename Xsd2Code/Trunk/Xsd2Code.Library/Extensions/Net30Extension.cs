@@ -104,7 +104,7 @@ namespace Xsd2Code.Library.Extensions
 
                 //var typeName = string.Concat('"', type.Name, '"');
                 //codeAttributeArgument.Add(new CodeAttributeArgument("Name", new CodeSnippetExpression(typeName)));
-                codeAttributeArgument.Add(new CodeAttributeArgument("Name", new CodePrimitiveExpression(type.Name)));
+                //codeAttributeArgument.Add(new CodeAttributeArgument("Name", new CodePrimitiveExpression(type.Name)));
 
                 if (!string.IsNullOrEmpty(schema.TargetNamespace))
                 {
@@ -127,7 +127,7 @@ namespace Xsd2Code.Library.Extensions
 
             if (GeneratorContext.GeneratorParams.GenerateDataContracts)
             {
-                var attrib = new CodeTypeReference("System.Runtime.Serialization.DataMemberAttribute");
+                var attrib = new CodeTypeReference("DataMember");
                 prop.CustomAttributes.Add(new CodeAttributeDeclaration(attrib));
             }
         }
@@ -337,6 +337,7 @@ namespace Xsd2Code.Library.Extensions
                         bool transformToAutomaticproperty = true;
 
                         var attributesString = new List<string>();
+                        int orderIndex = 1;
                         foreach (var attribute in item.CustomAttributes)
                         {
                             var attrib = attribute as CodeAttributeDeclaration;
@@ -349,18 +350,26 @@ namespace Xsd2Code.Library.Extensions
                                 }
                                 else
                                 {
+                                    if (attrib.Name == "DataMember")
+                                    {
+                                        attrib.Arguments.Add(new CodeAttributeArgument("Order",
+                                            new CodePrimitiveExpression(orderIndex++)));
+                                        attrib.Arguments.Add(new CodeAttributeArgument("EmitDefaultValue",
+                                            new CodePrimitiveExpression(false)));
+                                    }
+
                                     string attributesArguments = string.Empty;
                                     foreach (var arg in attrib.Arguments)
                                     {
                                         var argument = arg as CodeAttributeArgument;
                                         if (argument != null)
                                         {
-                                            attributesArguments += AttributeArgumentToString(argument) + ",";
+                                            attributesArguments += AttributeArgumentToString(argument) + ", ";
                                         }
                                     }
                                     // Remove last ","
                                     if (attributesArguments.Length > 0)
-                                        attributesArguments = attributesArguments.Remove(attributesArguments.Length - 1);
+                                        attributesArguments = attributesArguments.Remove(attributesArguments.Length - 2);
 
                                     attributesString.Add(string.Format("[{0}({1})]", GetShortestAttributeName(codeNamespace, attrib.Name), attributesArguments));
                                 }
