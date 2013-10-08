@@ -180,6 +180,8 @@ namespace Xsd2Code.Library
                     XmlSchema xsd = null;
                     Generator.Process(GeneratorParams.InputFilePath, ref xsd, ref ns);
                     GenerateEntityBuilderCode(ns);
+                    GenerateGroovyEntityCode(ns);
+                    GenerateGroovyEntityBuilderCode(ns);
                 }
                 catch (Exception e)
                 {
@@ -201,6 +203,17 @@ namespace Xsd2Code.Library
             }
 
             return new Result(true);
+        }
+
+        // TODO groovy code staff, use T4?
+        private void GenerateGroovyEntityBuilderCode(CodeNamespace ns)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void GenerateGroovyEntityCode(CodeNamespace ns)
+        {
+            throw new NotImplementedException();
         }
 
         private void GenerateEntityCode(CodeNamespace ns)
