@@ -18,8 +18,10 @@ namespace Xsd2Code.Library.Helpers
 
         public static string GetType(string dotNetType)
         {
-            var groovyType = dict[dotNetType];
-            return groovyType == null ? dotNetType : groovyType;
+            if (dict.ContainsKey(dotNetType))
+                return dict[dotNetType];
+            else
+                return dotNetType;
         }
     }
 }

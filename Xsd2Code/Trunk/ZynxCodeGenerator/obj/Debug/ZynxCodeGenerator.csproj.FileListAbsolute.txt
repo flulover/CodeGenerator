@@ -1,0 +1,13 @@
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\bin\Debug\ZynxCodeGenerator.exe.config
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\bin\Debug\ZynxCodeGenerator.exe
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\bin\Debug\ZynxCodeGenerator.pdb
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\ZynxCodeGenerator.csprojResolveAssemblyReference.cache
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\MainWindow.baml
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\MainWindow.g.cs
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\App.g.cs
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\ZynxCodeGenerator_MarkupCompile.cache
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\ZynxCodeGenerator.g.resources
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\ZynxCodeGenerator.Properties.Resources.resources
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\ZynxCodeGenerator.csproj.GenerateResource.Cache
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\ZynxCodeGenerator.exe
+C:\Code\xsd2code-99803\Xsd2Code\Trunk\ZynxCodeGenerator\obj\Debug\ZynxCodeGenerator.pdb

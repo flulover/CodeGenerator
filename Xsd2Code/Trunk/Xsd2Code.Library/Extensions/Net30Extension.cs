@@ -233,9 +233,14 @@ namespace Xsd2Code.Library.Extensions
                 {
                     if (!isArray)
                     {
-                        bool finded;
-                        if (!this.IsComplexType(field.Type, ns, out finded))
+                        if (this.fieldWithAssignementInCtorListField.FindIndex(p => p == field.Name) == -1)
                         {
+                            this.fieldListToRemoveField.Add(field);
+                        }
+
+//                        bool finded;
+//                        if (!this.IsComplexType(field.Type, ns, out finded))
+//                        {
 //                            if (finded)
 //                            {
 //                                // If this field is not assigned in ctor, add it in remove list.
@@ -245,13 +250,13 @@ namespace Xsd2Code.Library.Extensions
 //                                    this.fieldListToRemoveField.Add(field);
 //                                }
 //                            }
-                            // If this field is not assigned in ctor, add it in remove list.
-                            // with automatic property, don't need to keep private field.
-                            if (this.fieldWithAssignementInCtorListField.FindIndex(p => p == field.Name) == -1)
-                            {
-                                this.fieldListToRemoveField.Add(field);
-                            }
-                        }
+//                            // If this field is not assigned in ctor, add it in remove list.
+//                            // with automatic property, don't need to keep private field.
+//                            if (this.fieldWithAssignementInCtorListField.FindIndex(p => p == field.Name) == -1)
+//                            {
+//                                this.fieldListToRemoveField.Add(field);
+//                            }
+//                        }
                     }
                 }
             }
@@ -331,13 +336,13 @@ namespace Xsd2Code.Library.Extensions
                 // If databinding is disable, use automatic property
                 if (GeneratorContext.GeneratorParams.PropertyParams.AutomaticProperties)
                 {
+                    int orderIndex = 1;
                     foreach (var item in this.autoPropertyListField)
                     {
                         var cm = new CodeSnippetTypeMember();
                         bool transformToAutomaticproperty = true;
 
                         var attributesString = new List<string>();
-                        int orderIndex = 1;
                         foreach (var attribute in item.CustomAttributes)
                         {
                             var attrib = attribute as CodeAttributeDeclaration;

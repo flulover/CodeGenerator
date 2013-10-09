@@ -1,21 +1,583 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://namespace.zynx.com/2012/cdss/v1" xmlns:tns="http://namespace.zynx.com/2012/cdss/v1" targetNamespace="http://namespace.zynx.com/2012/cdss/v1" elementFormDefault="qualified" version="0.5.dev">
-  <xs:element name="PerformanceMeasure" type="PerformanceMeasure"/>
-  <xs:complexType name="PerformanceMeasure">
+  <xs:element name="AppliedDataTemplate" type="AppliedDataTemplate"/>
+  <xs:complexType name="AppliedDataTemplate">
+    <xs:complexContent>
+      <xs:extension base="CdssEntity">
+        <xs:sequence>
+          <xs:element name="AppliedDataTemplateIdentifier" type="AppliedDataTemplateIdentifier"/>
+          <xs:element name="DataTemplateReference" type="UnversionedPartitionedIdentifier"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AppliedDataTemplateIdentifier" type="AppliedDataTemplateIdentifier"/>
+  <xs:complexType name="AppliedDataTemplateIdentifier">
+    <xs:sequence>
+      <xs:element name="EnvironmentId" type="xs:int"/>
+      <xs:element name="AppliesTo" type="xs:string"/>
+      <xs:element name="Uri" type="xs:anyURI" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfComponent" type="ArrayOfComponent"/>
+  <xs:complexType name="ArrayOfComponent">
+    <xs:sequence>
+      <xs:element name="Component" type="Component" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCompositeOrderableGroupReference" type="ArrayOfCompositeOrderableGroupReference"/>
+  <xs:complexType name="ArrayOfCompositeOrderableGroupReference">
+    <xs:sequence>
+      <xs:element name="CompositeOrderableGroupReference" type="UnversionedPartitionedIdentifier" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDataElementInstances" type="ArrayOfDataElementInstances"/>
+  <xs:complexType name="ArrayOfDataElementInstances">
+    <xs:sequence>
+      <xs:element name="DataElementInstance" type="DataElementInstance" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>The value for a specific attribute of a DataTemplate. For instance, the value for either a text field or drop down list in a data entry screen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEnumerationReference" type="ArrayOfEnumerationReference"/>
+  <xs:complexType name="ArrayOfEnumerationReference">
+    <xs:sequence>
+      <xs:element name="EnumerationReference" type="UnversionedPartitionedIdentifier" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfErrorMessage" type="ArrayOfErrorMessage"/>
+  <xs:complexType name="ArrayOfErrorMessage">
+    <xs:sequence>
+      <xs:element name="ErrorMessage" type="ErrorMessage" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEvidenceResources" type="ArrayOfEvidenceResources"/>
+  <xs:complexType name="ArrayOfEvidenceResources">
     <xs:annotation>
-      <xs:documentation>Quality Measure impacted by the referencing item.</xs:documentation>
+      <xs:documentation>A collection of evidence resources.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="Id" type="xs:int">
+      <xs:element name="Evidence" type="Evidence" maxOccurs="unbounded">
         <xs:annotation>
-          <xs:documentation>The Zynx performance measure ID.</xs:documentation>
+          <xs:documentation>An evidence link.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="GroupName" type="xs:string">
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKcpOutcomes" type="ArrayOfKcpOutcomes"/>
+  <xs:complexType name="ArrayOfKcpOutcomes">
+    <xs:annotation>
+      <xs:documentation>A collection of Key Clinical Processes</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="KcpOutcome" type="xs:string" maxOccurs="unbounded">
         <xs:annotation>
-          <xs:documentation>The performance measure group name.</xs:documentation>
+          <xs:documentation>An individual Key Clinical Process.</xs:documentation>
         </xs:annotation>
       </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderedElement" type="ArrayOfOrderedElement"/>
+  <xs:complexType name="ArrayOfOrderedElement">
+    <xs:sequence>
+      <xs:element name="OrderedElement" type="OrderedElement" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderSets" type="ArrayOfOrderSets"/>
+  <xs:complexType name="ArrayOfOrderSets">
+    <xs:annotation>
+      <xs:documentation>Complex type representing a list of order set.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="OrderSet" type="OrderSet" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPerformanceMeasureResources" type="ArrayOfPerformanceMeasureResources"/>
+  <xs:complexType name="ArrayOfPerformanceMeasureResources">
+    <xs:annotation>
+      <xs:documentation>A collection of performance measure resources.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="PerformanceMeasure" type="PerformanceMeasure" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>A performance measure.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSectionGroupReference" type="ArrayOfSectionGroupReference"/>
+  <xs:complexType name="ArrayOfSectionGroupReference">
+    <xs:sequence>
+      <xs:element name="SectionGroupReference" type="UnversionedPartitionedIdentifier" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfThirdPartyStandard" type="ArrayOfThirdPartyStandard"/>
+  <xs:complexType name="ArrayOfThirdPartyStandard">
+    <xs:sequence>
+      <xs:element name="ThirdPartyStandard" type="ThirdPartyStandard" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BooleanDataElementType" type="BooleanDataElementType"/>
+  <xs:complexType name="BooleanDataElementType">
+    <xs:sequence>
+      <xs:element name="DefaultValue" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="Required" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Bundle" type="Bundle"/>
+  <xs:complexType name="Bundle">
+    <xs:annotation>
+      <xs:documentation>A collection of orderables that exhibit either an AND or OR behavior.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Metadata" type="ItemMetadata" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Metadata associated with a bundle such as edit comments, additional information, performance measures, evidence links, and key clinical processes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="BundleBehavior">
+        <xs:annotation>
+          <xs:documentation>Specifies the bundle's section behavior. Bundle behaviors may be 'Group' or 'Selection'.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Preselect" type="PreselectEnumeration" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Specifies the selection behavior for the given item. Selection behavior may be one of the following: Optional, Default, DefaultWithReason, Required.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Components" type="CompositeOrderableComponents" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The components included in this bundle.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="BundleBehavior">
+    <xs:annotation>
+      <xs:documentation>Specifies the bundle's selection behavior. 'Group' specifies an AND selection behavior where either all items are selected, or none. 'Selection' specifies an OR section behavior where zero or more items in the bundle may be selected.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Group"/>
+      <xs:enumeration value="Selection"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CatalogItemStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="active"/>
+      <xs:enumeration value="inactive"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CatalogSummary" type="CatalogSummary"/>
+  <xs:complexType name="CatalogSummary">
+    <xs:sequence>
+      <xs:element name="EnvironmentId" type="xs:int"/>
+      <xs:element name="Uri" type="xs:anyURI"/>
+      <xs:element name="IdspacesSummary" type="ResourceSummary"/>
+      <xs:element name="SectionGroupsSummary" type="ResourceSummary"/>
+      <xs:element name="SectionsSummary" type="ResourceSummary"/>
+      <xs:element name="OrderableGroupsSummary" type="ResourceSummary"/>
+      <xs:element name="OrderablesSummary" type="ResourceSummary"/>
+      <xs:element name="CompositeOrderableGroupsSummary" type="ResourceSummary"/>
+      <xs:element name="CompositeOrderablesSummary" type="ResourceSummary"/>
+      <xs:element name="EnumerationsSummary" type="ResourceSummary"/>
+      <xs:element name="EnumerationValuesSummary" type="ResourceSummary"/>
+      <xs:element name="DataElementsSummary" type="ResourceSummary"/>
+      <xs:element name="DataTemplatesSummary" type="ResourceSummary"/>
+      <xs:element name="AppliedDataTemplatesSummary" type="ResourceSummary"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CdssEntity" type="CdssEntity"/>
+  <xs:complexType name="CdssEntity" abstract="true">
+    <xs:sequence>
+      <xs:element name="ErrorMessages" type="ArrayOfErrorMessage" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClinicalConcept" type="ClinicalConcept"/>
+  <xs:complexType name="ClinicalConcept">
+    <xs:annotation>
+      <xs:documentation>A Zynx-defined clinical concept along with a collection of semantically equivalent terms from standard terminologies and ontologies.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Type" type="CoverageType">
+        <xs:annotation>
+          <xs:documentation>The general category for the clinical concept.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ZynxConceptId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Zynx unique concept identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ZynxConceptDisplayName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The Zynx concept display name for human consumption.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ZynxConceptDescription" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A human narrative description of the concept.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ThirdPartyStandards" type="ThirdPartyEncodings" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>References to semantically equivalent terms in standard terminologies</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClinicalCoverage" type="ClinicalCoverage"/>
+  <xs:complexType name="ClinicalCoverage">
+    <xs:annotation>
+      <xs:documentation>A collection of clinical concepts (generally based on standard terminologies) that can be associated with a knowledge artifact for information retrieval and categorization purposes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Coverage" type="ClinicalConcept" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>An individual clinical or demographic concept of relevance.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CodedConcept" type="CodedConcept"/>
+  <xs:complexType name="CodedConcept">
+    <xs:annotation>
+      <xs:documentation>Represents a given term in a standard terminology or ontology such as SNOMED CT, RxNorm, etc...</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Code" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The code symbol for a given term or concept as defined in the terminology.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DisplayName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The human readable name for the given term/concept as it exists in the terminology.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CodeSystem" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The code system identifier for the code system that defines the code. This is typically an OID such as the following SNOMED CT OID: 2.16.840.1.113883.6.96</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CodeSystemDisplayName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The display name for the given code system such as "SNOMED CT"</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CodeSystemVersion" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The version of the referenced code system when relevant.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueSet" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The value set OID or unique identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueSetVersion" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The version of the value set referenced by the coded concept, when relevant.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OriginalText" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The original text that this code is meant to codify and which represents the intended meaning of the user.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The type of code.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Component" type="Component"/>
+  <xs:complexType name="Component">
+    <xs:choice>
+      <xs:element name="TextComponent" type="TextComponent" minOccurs="0"/>
+      <xs:element name="OrderableComponent" type="OrderableComponent" minOccurs="0"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="ComponentDetail" type="ComponentDetail"/>
+  <xs:complexType name="ComponentDetail">
+    <xs:sequence>
+      <xs:element name="Editable" type="xs:boolean"/>
+      <xs:element name="DataTemplateReference" type="UnversionedPartitionedIdentifier" minOccurs="0"/>
+      <xs:element name="DataElementValues" type="DataElementValues" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositeOrderable" type="CompositeOrderable"/>
+  <xs:complexType name="CompositeOrderable">
+    <xs:complexContent>
+      <xs:extension base="IdentifiableEntity">
+        <xs:sequence>
+          <xs:element name="Name" type="RequiredString1000"/>
+          <xs:element name="Description" type="RequiredString1000"/>
+          <xs:element name="Status" type="CatalogItemStatus"/>
+          <xs:element name="PrimaryCompositeOrderableGroupReference" type="UnversionedPartitionedIdentifier"/>
+          <xs:element name="SecondaryCompositeOrderableGroupReferences" type="ArrayOfCompositeOrderableGroupReference" minOccurs="0"/>
+          <xs:element name="CompositeOrderableType" type="CompositeOrderableType"/>
+          <xs:element name="OrderableComponentGroupingType" type="OrderableComponentGroupingType"/>
+          <xs:element name="Components" type="ArrayOfComponent"/>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompositeOrderableComponents" type="CompositeOrderableComponents"/>
+  <xs:complexType name="CompositeOrderableComponents">
+    <xs:annotation>
+      <xs:documentation>Possible choices for the components of Bundles and CompositeOrderables.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="ReminderComponent" type="TextItem">
+          <xs:annotation>
+            <xs:documentation>A clinical reminder.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="OrderComponent" type="OrderableItem">
+          <xs:annotation>
+            <xs:documentation>An child component orderable.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="TextComponent" type="TextItem">
+          <xs:annotation>
+            <xs:documentation>A textual, read-only, representation of an orderable.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CompositeOrderableGroup" type="CompositeOrderableGroup"/>
+  <xs:complexType name="CompositeOrderableGroup">
+    <xs:complexContent>
+      <xs:extension base="TermGroupBase">
+        <xs:sequence>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompositeOrderableItem" type="CompositeOrderableItem"/>
+  <xs:complexType name="CompositeOrderableItem">
+    <xs:sequence>
+      <xs:element name="CompositeOrderableReferences" type="ReferenceBindings">
+        <xs:annotation>
+          <xs:documentation>The reference to the composite orderable item in the Orderable Catalog.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Metadata" type="ItemMetadata" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Metadata associated with a composite orderable such as edit comments, name overrides, additional information, performance measures, evidence links, and key clinical processes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Preselect" type="PreselectEnumeration" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Specifies the selection behavior for the given item. Selection behavior may be one of the following: Optional, Default, DefaultWithReason, Required.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CachedSentence" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Human-readable representation of this orderable item. This field is generally derived from the concatenation of the term display name or override, additional info, and the concatenated instance values of the AppliedDataTemplate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AppliedData" type="DataTemplateInstance" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>AppliedData holds the instance values for user-defined metadata attributes common to all  composite orderable resources in a given global namespace. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Components" type="CompositeOrderableComponents" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The component orderables and reminders that make up this composite orderable.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="CompositeOrderableType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="iss"/>
+      <xs:enumeration value="ivs"/>
+      <xs:enumeration value="ost"/>
+      <xs:enumeration value="pca"/>
+      <xs:enumeration value="tpn"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CoverageType">
+    <xs:annotation>
+      <xs:documentation>The general concept category such as the gender of patient, the clinical focus of an artifact, or a workflow setting/task.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PatientGender"/>
+      <xs:enumeration value="PatientAgeGroup"/>
+      <xs:enumeration value="ClinicalFocus"/>
+      <xs:enumeration value="TargetUser"/>
+      <xs:enumeration value="WorkflowSetting"/>
+      <xs:enumeration value="WorkflowTask"/>
+      <xs:enumeration value="ClinicalVenue"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DataElement" type="DataElement"/>
+  <xs:complexType name="DataElement">
+    <xs:complexContent>
+      <xs:extension base="IdentifiableEntity">
+        <xs:sequence>
+          <xs:element name="Name" type="RequiredString100"/>
+          <xs:element name="Description" type="RequiredString255"/>
+          <xs:element name="Status" type="CatalogItemStatus"/>
+          <xs:element name="Label" type="RequiredString100"/>
+          <xs:element name="IsInSentence" type="xs:boolean"/>
+          <xs:element name="DataElementType" type="DataElementType"/>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DataElementInstance" type="DataElementInstance"/>
+  <xs:complexType name="DataElementInstance">
+    <xs:annotation>
+      <xs:documentation>The value for a specific attribute of a DataTemplate. For instance, the value for either a text field or drop down list in a data entry screen.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DataElementReference" type="UnversionedPartitionedIdentifier">
+        <xs:annotation>
+          <xs:documentation>A reference to a Data Element defined in an Orderable Catalog.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="FreeValue" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>The textual value of a data element. Typically, the value entered in a text field.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="EnumerationValueReferences" type="ReferenceBindings">
+          <xs:annotation>
+            <xs:documentation>The reference to an enumeration value in an enumeration. For instance,  a reference to a particular selection in a drop down list such as 'Q8H' in a list of frequencies.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataElementType" type="DataElementType"/>
+  <xs:complexType name="DataElementType">
+    <xs:choice>
+      <xs:element name="Boolean" type="BooleanDataElementType"/>
+      <xs:element name="Text" type="TextDataElementType"/>
+      <xs:element name="MultilineText" type="TextDataElementType"/>
+      <xs:element name="SingleSelect" type="SingleSelectDataElementType"/>
+      <xs:element name="Integer" type="IntegerDataElementType"/>
+      <xs:element name="Decimal" type="DecimalDataElementType"/>
+      <xs:element name="Hidden" type="xs:string"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="DataElementValue" type="DataElementValue"/>
+  <xs:complexType name="DataElementValue">
+    <xs:sequence>
+      <xs:element name="DataElementReference" type="UnversionedPartitionedIdentifier"/>
+      <xs:element name="DefaultValue" type="RequiredString255" minOccurs="0"/>
+      <xs:element name="DefaultEnumerationValueReference" type="UnversionedPartitionedIdentifier" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataElementValues" type="DataElementValues"/>
+  <xs:complexType name="DataElementValues">
+    <xs:sequence>
+      <xs:element name="DataElementValue" type="DataElementValue" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataTemplate" type="DataTemplate"/>
+  <xs:complexType name="DataTemplate">
+    <xs:complexContent>
+      <xs:extension base="IdentifiableEntity">
+        <xs:sequence>
+          <xs:element name="Name" type="RequiredString100"/>
+          <xs:element name="Description" type="RequiredString500"/>
+          <xs:element name="Status" type="CatalogItemStatus"/>
+          <xs:element name="OrderedElements" type="ArrayOfOrderedElement"/>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DataTemplateInstance" type="DataTemplateInstance"/>
+  <xs:complexType name="DataTemplateInstance">
+    <xs:annotation>
+      <xs:documentation>A DataTemplateInstance holds all attribute instance values for a given data template. For instance, a data template may specify a frequency attribute of type Enumeration with EnumerationValues such as 'Q8H', 'TID', 'Q4H', etc... A DataTemplateInstance for this DataTemplate may specify the value 'Q8H' for the frequency attribute.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DataTemplateReference" type="UnversionedPartitionedIdentifier">
+        <xs:annotation>
+          <xs:documentation>A reference to a DataTemplate that typically defines the set of fields that make up a 'data entry screen'.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DataElementInstances" type="ArrayOfDataElementInstances" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Free text values or selected list items (enumeration values) for each attribute defined in the referenced data template.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CachedSentence" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Human-readable representation of this data template. This attribute is generally derived from the concatenation of instance values for the attributes specified in a given data template.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataTemplateReferencesType" type="DataTemplateReferencesType"/>
+  <xs:complexType name="DataTemplateReferencesType">
+    <xs:sequence>
+      <xs:element name="DataTemplateReference" type="UnversionedPartitionedIdentifier" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DecimalDataElementType" type="DecimalDataElementType"/>
+  <xs:complexType name="DecimalDataElementType">
+    <xs:sequence>
+      <xs:element name="DefaultValue" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="Required" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="MinValue" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="MaxValue" type="xs:decimal" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="DirectionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Increase"/>
+      <xs:enumeration value="Decrease"/>
+      <xs:enumeration value="NoImpact"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Enumeration" type="Enumeration"/>
+  <xs:complexType name="Enumeration">
+    <xs:complexContent>
+      <xs:extension base="TermGroupBase">
+        <xs:sequence>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EnumerationValue" type="EnumerationValue"/>
+  <xs:complexType name="EnumerationValue">
+    <xs:complexContent>
+      <xs:extension base="IdentifiableEntity">
+        <xs:sequence>
+          <xs:element name="Name" type="RequiredString1000"/>
+          <xs:element name="Description" type="RequiredString1000"/>
+          <xs:element name="Status" type="CatalogItemStatus"/>
+          <xs:element name="PrimaryEnumerationReference" type="UnversionedPartitionedIdentifier"/>
+          <xs:element name="SecondaryEnumerationReferences" type="ArrayOfEnumerationReference" minOccurs="0"/>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ErrorMessage" type="ErrorMessage"/>
+  <xs:complexType name="ErrorMessage">
+    <xs:sequence>
+      <xs:element name="ErrorType" type="xs:string"/>
+      <xs:element name="ErrorCode" type="xs:string"/>
+      <xs:element name="Path" type="xs:string"/>
+      <xs:element name="Message" type="xs:string"/>
+      <xs:element name="Constraint" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Evidence" type="Evidence"/>
@@ -47,6 +609,918 @@
       <xs:element name="IsZynxEvidence" type="xs:boolean">
         <xs:annotation>
           <xs:documentation>When 'true', this evidence page is a Zynx evidence page.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Folder" type="Folder"/>
+  <xs:complexType name="Folder">
+    <xs:annotation>
+      <xs:documentation>Folder represents a hierarchical structure such as a file system.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The folder identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The human-readable folder name.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Folder" type="Folder" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A nested folder,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GlobalIdentifier" type="GlobalIdentifier"/>
+  <xs:complexType name="GlobalIdentifier">
+    <xs:annotation>
+      <xs:documentation>An globally unique identifier for a non-partitioned namespace. PartitionedIdentifiers may be versioned or unversioned depending on the type of resource.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="EnvironmentId" type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>The EnvironmentID is an identifier typically associated with a given health facility and used to support multi-tenancy.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Id" type="RequiredString200">
+        <xs:annotation>
+          <xs:documentation>The identifier for a single resource or a set of versioned resources in the case of versioned identifiers. This identifier must be stable and unique.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IdentifiableEntity" type="IdentifiableEntity"/>
+  <xs:complexType name="IdentifiableEntity" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="CdssEntity">
+        <xs:sequence>
+          <xs:element name="Identifier" type="UnversionedPartitionedIdentifier" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Idspace" type="Idspace"/>
+  <xs:complexType name="Idspace">
+    <xs:complexContent>
+      <xs:extension base="CdssEntity">
+        <xs:sequence>
+          <xs:element name="IdspaceIdentifier" type="UnversionedGlobalIdentifier"/>
+          <xs:element name="Name" type="RequiredString100"/>
+          <xs:element name="Description" type="RequiredString255"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="IntegerDataElementType" type="IntegerDataElementType"/>
+  <xs:complexType name="IntegerDataElementType">
+    <xs:sequence>
+      <xs:element name="DefaultValue" type="xs:int" minOccurs="0"/>
+      <xs:element name="Required" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="MinValue" type="xs:int" minOccurs="0"/>
+      <xs:element name="MaxValue" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemMetadata" type="ItemMetadata"/>
+  <xs:complexType name="ItemMetadata">
+    <xs:annotation>
+      <xs:documentation>Metadata associated with a section, bundle, orderable or composite orderable such as edit comments, name overrides, additional information, performance measures, evidence links, and key clinical processes.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Override" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A textual name used to override the display name of a catalog term. Typically a human-friendly version of a less friendly term display name.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Comment" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Field that typically holds editing comments.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AdditionalInformation" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Human-friendly text that is appended to either a term display name or an override.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EvidenceList" type="ArrayOfEvidenceResources" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>One or more references to sources of clinical evidence.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PerformanceMeasures" type="ArrayOfPerformanceMeasureResources" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>One or more performance measures that are relevant in the context of this item.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="KcpOutcomes" type="ArrayOfKcpOutcomes" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>One or more Key Clinical Processes that are impacted by the presence of this item.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LinkableOrderset" type="LinkableOrderset"/>
+  <xs:complexType name="LinkableOrderset">
+    <xs:annotation>
+      <xs:documentation>A reference to another order set. Linkable order sets are used for modular order set designs.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="OrderSetReference" type="VersionedGlobalIdentifier">
+        <xs:annotation>
+          <xs:documentation>The linked order set reference.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Title" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The title for this linked order set reference.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Comment" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Comments associated with this linked order set. Comments may further describe the reference itself within the context of the including order set or provide editing information to content authors.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExternalId" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The external system identifier for this linked order set.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Orderable" type="Orderable"/>
+  <xs:complexType name="Orderable">
+    <xs:complexContent>
+      <xs:extension base="IdentifiableEntity">
+        <xs:sequence>
+          <xs:element name="Name" type="RequiredString1000"/>
+          <xs:element name="Description" type="RequiredString1000"/>
+          <xs:element name="Status" type="CatalogItemStatus"/>
+          <xs:element name="RelatedToMedications" type="xs:boolean"/>
+          <xs:element name="PrimaryOrderableGroupReference" type="UnversionedPartitionedIdentifier"/>
+          <xs:element name="SecondaryOrderableGroupReferences" type="OrderableGroupReferencesType" minOccurs="0"/>
+          <xs:element name="DetailMetadata" type="DataTemplateReferencesType" minOccurs="0"/>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OrderableComponent" type="OrderableComponent"/>
+  <xs:complexType name="OrderableComponent">
+    <xs:sequence>
+      <xs:element name="OrderableReference" type="UnversionedPartitionedIdentifier"/>
+      <xs:element name="ComponentDescription" type="RequiredString2000"/>
+      <xs:element name="Details" type="ComponentDetail" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="OrderableComponentGroupingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="all"/>
+      <xs:enumeration value="single"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OrderableGroup" type="OrderableGroup"/>
+  <xs:complexType name="OrderableGroup">
+    <xs:complexContent>
+      <xs:extension base="TermGroupBase">
+        <xs:sequence>
+          <xs:element name="RelatedToMedications" type="xs:boolean"/>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OrderableGroupReferencesType" type="OrderableGroupReferencesType"/>
+  <xs:complexType name="OrderableGroupReferencesType">
+    <xs:sequence>
+      <xs:element name="OrderableGroupReference" type="UnversionedPartitionedIdentifier" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderableItem" type="OrderableItem"/>
+  <xs:complexType name="OrderableItem">
+    <xs:sequence>
+      <xs:element name="OrderableItemReferences" type="ReferenceBindings">
+        <xs:annotation>
+          <xs:documentation>The reference to the orderable item in the Orderable Catalog.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Metadata" type="ItemMetadata" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Metadata associated with an orderable such as edit comments, name overrides, additional information, performance measures, evidence links, and key clinical processes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AppliedData" type="DataTemplateInstance" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>AppliedData holds the instance values for user-defined metadata attributes common to all  orderable resources in a given global namespace. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Preselect" type="PreselectEnumeration" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Specifies the selection behavior for the given item. Selection behavior may be one of the following: Optional, Default, DefaultWithReason, Required.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CachedSentence" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Human-readable representation of this orderable item. This field is generally derived from the concatenation of the term display name or override, additional info, and the concatenated instance values of the AppliedDataTemplate.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="OrderDetail" type="DataTemplateInstance" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>OrderDetail holds the instance values for this orderable item's workspace attributes as specified by the referenced Data Template.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderedElement" type="OrderedElement"/>
+  <xs:complexType name="OrderedElement">
+    <xs:sequence>
+      <xs:element name="DataElementReference" type="UnversionedPartitionedIdentifier"/>
+      <xs:element name="Label" type="RequiredString255" minOccurs="0"/>
+      <xs:element name="IsInSentence" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="DefaultValue" type="RequiredString255" minOccurs="0"/>
+      <xs:element name="DefaultEnumerationValueReference" type="UnversionedPartitionedIdentifier" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderSet" type="OrderSet"/>
+  <xs:complexType name="OrderSet">
+    <xs:annotation>
+      <xs:documentation>An Order Set is a type of CDS knowledge document that represents a set of orders and reminders pertaining typically to a specific population group or DRG. Order sets also include related metadata and document structures such as sections, bundles, and links to other order sets.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="OrderSetIdentifier" type="OrderSetIdentifier">
+        <xs:annotation>
+          <xs:documentation>The identifier for this versioned order set resource.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Metadata" type="OrderSetMetadata">
+        <xs:annotation>
+          <xs:documentation>The header section of this order set containing the relevant metadata associated with the order set. Informational attributes describing this knowledge artifact such as its title, status, location, related keywords, modified date, etc... This section does not contain the actual clinical payload that makes up the order set.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AppliedData" type="DataTemplateInstance" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>AppliedData holds the instance values for user-defined metadata attributes common to all order set resources in a given global namespace. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TopLevelItems" type="OrderSetContent" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The clinical content for the order set.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderSetContent" type="OrderSetContent"/>
+  <xs:complexType name="OrderSetContent">
+    <xs:annotation>
+      <xs:documentation>The clinical content section for this order set. This section may contain either references to other order sets or top level sections.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="OrderSetSection" type="OrderSetSection">
+          <xs:annotation>
+            <xs:documentation>Represents a top-level section in an order set such as 'Vital Signs' or 'Medications'. Sections can contain other (nested) sections, linkable order sets, simple and composite orderable items, and reminders. Bundles are included but their use is discouraged.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="LinkableOrderset" type="LinkableOrderset">
+          <xs:annotation>
+            <xs:documentation>A reference to another order set. Linkable order sets are used for modular order set designs.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderSetIdentifier" type="OrderSetIdentifier"/>
+  <xs:complexType name="OrderSetIdentifier">
+    <xs:annotation>
+      <xs:documentation>Stable versioned identifier that uniquely identifies a versioned order set. An order set identifier specifies both a document ID and version as well as provides a URI for both the summary and full representation of the order set.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="VersionedGlobalIdentifier">
+        <xs:sequence>
+          <xs:element name="SummaryUri" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>An identifier that uniquely identifies a summary version of the resource.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OrderSetList" type="OrderSetList"/>
+  <xs:complexType name="OrderSetList">
+    <xs:annotation>
+      <xs:documentation>OrderSetList represents a collection of order sets as well as metadata about this collection to support the paging of results. This collection is generally returned after a query is made to the Order Set Service API. OrderSetList may consist of either a list of order set summaries or a list of full order sets.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ResultMetadata" type="ResultMetadata"/>
+      <xs:element name="OrderSets" type="ArrayOfOrderSets" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderSetMetadata" type="OrderSetMetadata"/>
+  <xs:complexType name="OrderSetMetadata">
+    <xs:annotation>
+      <xs:documentation>Informational attributes describing this knowledge artifact such as its title, status, location, related keywords, modified date, etc... This section does not contain the actual clinical payload that makes up the order set.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Title" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The human readable name of the order set.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="Status">
+        <xs:annotation>
+          <xs:documentation>The status of this order set such as Draft, Released, Review, Retired</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Comments" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Comments associated with this order set. Comments may further elaborate on the content of this order set or provide pointers to content authors.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Folder" type="Folder" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The location of this order set presented in a hierarchical folder structure.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Applicability" type="ClinicalCoverage" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Relevant terms associated with this order set such as applicable care venues and settings and population-specific attributes such as age group, clinical findings, etc...</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SynchronizationValidation" type="SynchronizationValidation" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>SynchronizationValidation informs the consumer as to whether any errors or warnings were encountered during artifact validation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="LastModifiedDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Timestamp indicating when this order set was last modified and persisted.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExpirationDate" type="xs:dateTime" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Timestamp indicating when this order set expires and is no longer considered valid. The omission of an expiration date indicates that this order set does not expire unless deleted or retired.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Staged" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>When set to true, this order set can be downloaded by an EHR system using the Zynx Web API. When set to false, this order set will not be enabled for EHR download.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Users" type="Users" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Actors - generally Creator, Modifier, or Owner - associated with the lifecycle of this order set.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Institution" type="Organization" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The organization that contributed or sponsored this content.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsLinkable" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag indicating whether this order set can be referenced by other order sets.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PublishedToViewspace" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Flag indicating whether this order set has been published to ViewSpace for collaborative review.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DerivedFrom" type="VersionedGlobalIdentifier" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Identifier for an order set from which this document was derived.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderSetSection" type="OrderSetSection"/>
+  <xs:complexType name="OrderSetSection">
+    <xs:annotation>
+      <xs:documentation>Represents a section in an order set knowledge document such as 'Vital Signs' or 'Medications'. Sections can contain other (nested) sections, linkable order sets, simple and composite orderable items, and reminders. Bundles are included but their use is discouraged.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="SectionReferences" type="ReferenceBindings" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A reference to the section catalog term associated with this section.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Metadata" type="ItemMetadata" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Metadata associated with a section such as edit comments, name overrides, additional information, performance measures, evidence links, and key clinical processes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AppliedData" type="DataTemplateInstance" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>AppliedData holds the instance values for user-defined metadata attributes common to all  section resources in a given global namespace. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Items" type="SectionItems" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The components of an order set that can be found in a section.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Organization" type="Organization"/>
+  <xs:complexType name="Organization">
+    <xs:annotation>
+      <xs:documentation>Concept representing an organization with a name and identifier.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The Zynx organization identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Name" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The name of the organization.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PartitionedIdentifier" type="PartitionedIdentifier"/>
+  <xs:complexType name="PartitionedIdentifier">
+    <xs:annotation>
+      <xs:documentation>An globally unique identifier for a partitioned namespace. PartitionedIdentifiers may be versioned or unversioned depending on the type of resource. Note that in a PartitionedIdentifier, the Id may only be unique within the scope of an Idspace.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="EnvironmentId" type="xs:positiveInteger">
+        <xs:annotation>
+          <xs:documentation>The EnvironmentID is an identifier typically associated with a given health facility and used to support multi-tenancy.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Idspace" type="RequiredString200">
+        <xs:annotation>
+          <xs:documentation>
+            A partition of the global namespace to ensure uniqueness of identifiers. For instance, a global facility namespace may be partitioned between Meds and Non-Meds.
+
+            The combination of Idspace and Id should be unique for a given environment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Id" type="RequiredString200">
+        <xs:annotation>
+          <xs:documentation>The identifier for a single resource or a set of versioned resources in the case of versioned identifiers. This identifier must be stable and unique.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="SecondaryKey" type="RequiredString200" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>An identifier that is stable across system deployments. Some EMR clients may have identifiers which are unique within a test environment, but may be different in a production environment. For instance, while a Development, QA, or Production environment might have identifiers that are unique to each one but not necessarily unique across the three, the SecondaryKey must be unique across all three.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PerformanceMeasure" type="PerformanceMeasure"/>
+  <xs:complexType name="PerformanceMeasure">
+    <xs:annotation>
+      <xs:documentation>Quality Measure impacted by the referencing item.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The Zynx performance measure ID.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GroupName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The performance measure group name.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="PreselectEnumeration">
+    <xs:annotation>
+      <xs:documentation>Specifies preselection behavior for order set components. 'Optional' indicates that the item may be selected. 'Default' indicates that the item is selected by default but could potentially be unselected. 'DefaultWithReason' indicates that the item is selected by default and can only be unselected if a reason is provided. 'Required' indicates that this item must be selected and cannot/should not be unselected.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Optional"/>
+      <xs:enumeration value="Default"/>
+      <xs:enumeration value="DefaultWithReason"/>
+      <xs:enumeration value="Required"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ReferenceBinding" type="ReferenceBinding"/>
+  <xs:complexType name="ReferenceBinding">
+    <xs:sequence>
+      <xs:element name="ExternalConceptReference" type="UnversionedPartitionedIdentifier" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A reference to a term from an organization's own orderable catalog.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AuthoringConceptReference" type="ZynxReference" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>A Zynx Default or Custom Catalog term. Such terms have assigned PivotIDs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReferenceBindings" type="ReferenceBindings"/>
+  <xs:complexType name="ReferenceBindings">
+    <xs:sequence>
+      <xs:element name="ReferenceBinding" type="ReferenceBinding" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>A 'mapped' reference capable of representing a reference association between a Zynx term with PivotID and an external term such as an organization catalog term imported using the Zynx Catalog API.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="RequiredString100">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="100"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RequiredString1000">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="1000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RequiredString150">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="150"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RequiredString200">
+    <xs:annotation>
+      <xs:documentation>A non-empty string that includes a restriction that minLength = 1. This is needed for fields that require xs:string and cannot be empty.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="200"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RequiredString2000">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RequiredString255">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="255"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RequiredString500">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="500"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ResourceSummary" type="ResourceSummary"/>
+  <xs:complexType name="ResourceSummary">
+    <xs:sequence>
+      <xs:element name="TotalCount" type="xs:int"/>
+      <xs:element name="ItemListUri" type="xs:anyURI"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultMetadata" type="ResultMetadata"/>
+  <xs:complexType name="ResultMetadata">
+    <xs:annotation>
+      <xs:documentation>Metadata pertaining to the paging of a list of items.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Uri" type="xs:anyURI">
+        <xs:annotation>
+          <xs:documentation>The URI that generated the list.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Previous" type="xs:anyURI" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>For paged results where CurrentPage &gt; 1, a URL to the previous page of results. If CurrentPage == 0, this element is omitted from the results.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Next" type="xs:anyURI" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>For paged results where CurrentPage &lt; lastPageNumber, a URL to the next page of results. If CurrentPage == lastPageNumber, this element is omitted from the results.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalCount" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Integer indicating the total number of items that matched the query and may be returned to the caller through paging.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PageSize" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Integer indicating the maximum number of results per page. For instance, PageSize = 5 specifies that a given page may hold at most 5 results per page.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CurrentPage" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>CurrentPage specifies the page number currently indicated by the cursor.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TotalPageCount" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>TotalPageCount is an integer that specifies the total number of pages needed to accommodate all results produced by this query. It can be represented by the formula: TotalPageCount = ROUND_UP(TotalCount/PageSize)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="RoleType">
+    <xs:annotation>
+      <xs:documentation>RoleType is an enumeration of the roles associated with the lifecycle of an order set.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Creator"/>
+      <xs:enumeration value="Modifier"/>
+      <xs:enumeration value="Owner"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Section" type="Section"/>
+  <xs:complexType name="Section">
+    <xs:complexContent>
+      <xs:extension base="IdentifiableEntity">
+        <xs:sequence>
+          <xs:element name="Name" type="RequiredString1000"/>
+          <xs:element name="Description" type="RequiredString1000"/>
+          <xs:element name="Status" type="CatalogItemStatus"/>
+          <xs:element name="PrimarySectionGroupReference" type="UnversionedPartitionedIdentifier"/>
+          <xs:element name="SecondarySectionGroupReferences" type="ArrayOfSectionGroupReference" minOccurs="0"/>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SectionGroup" type="SectionGroup"/>
+  <xs:complexType name="SectionGroup">
+    <xs:complexContent>
+      <xs:extension base="TermGroupBase">
+        <xs:sequence>
+          <xs:element name="ThirdPartyStandards" type="ArrayOfThirdPartyStandard" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SectionItems" type="SectionItems"/>
+  <xs:complexType name="SectionItems">
+    <xs:annotation>
+      <xs:documentation>Base class for all order set components that can be found under a section.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="SectionItem" type="OrderSetSection">
+          <xs:annotation>
+            <xs:documentation>Represents a sub-section in an order set such as drug class sections under a Medication section. Sections can contain other (nested) sections, linkable order sets, simple and composite orderable items, and reminders. Bundles are included but their use is discouraged.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="OrderSentenceItem" type="OrderableItem">
+          <xs:annotation>
+            <xs:documentation>An order sentence.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="ReminderItem" type="TextItem">
+          <xs:annotation>
+            <xs:documentation>A clinical reminder.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="CompositeOrderSentenceItem" type="CompositeOrderableItem">
+          <xs:annotation>
+            <xs:documentation>A composite order sentence.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="LinkableOrderSetItem" type="LinkableOrderset">
+          <xs:annotation>
+            <xs:documentation>A linked order set reference.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="BundleItem" type="Bundle">
+          <xs:annotation>
+            <xs:documentation>A component bundle.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceConfiguration" type="ServiceConfiguration"/>
+  <xs:complexType name="ServiceConfiguration">
+    <xs:sequence>
+      <xs:element name="EnvironmentId" type="xs:int"/>
+      <xs:element name="Uri" type="xs:anyURI" minOccurs="0"/>
+      <xs:element name="VendorId" type="xs:int"/>
+      <xs:element name="VendorProductVersion" type="xs:string"/>
+      <xs:element name="UsesEncodedIds" type="xs:boolean"/>
+      <xs:element name="UsesSecondaryKeyMatching" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SingleSelectDataElementType" type="SingleSelectDataElementType"/>
+  <xs:complexType name="SingleSelectDataElementType">
+    <xs:sequence>
+      <xs:element name="EnumerationReferences" type="ArrayOfEnumerationReference"/>
+      <xs:element name="DefaultEnumerationValueReference" type="UnversionedPartitionedIdentifier" minOccurs="0"/>
+      <xs:element name="Required" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Status">
+    <xs:annotation>
+      <xs:documentation>
+        Status of a knowledge artifact.
+        Draft - the order set is currently in the process of being edited.
+        Released - the order set has been released for consumption.
+        Retired - the order set is no longer active and should not be consumed.
+        Review - the order set has been edited and is ready for review or in the process of being reviewed.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Draft"/>
+      <xs:enumeration value="Released"/>
+      <xs:enumeration value="Retired"/>
+      <xs:enumeration value="Review"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SynchronizationValidation" type="SynchronizationValidation"/>
+  <xs:complexType name="SynchronizationValidation">
+    <xs:annotation>
+      <xs:documentation>SynchronizationValidation informs the consumer as to whether any errors or warnings were encountered during artifact validation.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Errors" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>True if errors were encountered during validation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Warnings" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>True if warnings were encountered during export validation.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TermGroupBase" type="TermGroupBase"/>
+  <xs:complexType name="TermGroupBase" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="IdentifiableEntity">
+        <xs:sequence>
+          <xs:element name="Name" type="RequiredString100"/>
+          <xs:element name="Description" type="RequiredString500"/>
+          <xs:element name="Status" type="CatalogItemStatus"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TextComponent" type="TextComponent"/>
+  <xs:complexType name="TextComponent">
+    <xs:sequence>
+      <xs:element name="IsReminder" type="xs:boolean"/>
+      <xs:element name="ComponentDescription" type="RequiredString2000"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TextDataElementType" type="TextDataElementType"/>
+  <xs:complexType name="TextDataElementType">
+    <xs:sequence>
+      <xs:element name="DefaultValue" type="RequiredString255" minOccurs="0"/>
+      <xs:element name="Required" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="MinLength" type="xs:positiveInteger" minOccurs="0"/>
+      <xs:element name="MaxLength" type="xs:positiveInteger" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TextItem" type="TextItem"/>
+  <xs:complexType name="TextItem">
+    <xs:sequence>
+      <xs:element name="Metadata" type="ItemMetadata" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Metadata associated with a reminder such as edit comments, performance measures, evidence links, and key clinical processes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Text" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>The textual representation of this item.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ThirdPartyEncodings" type="ThirdPartyEncodings"/>
+  <xs:complexType name="ThirdPartyEncodings">
+    <xs:annotation>
+      <xs:documentation>Collection of third party terminology bindings</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ThirdPartyStandard" type="CodedConcept" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ThirdPartyStandard" type="ThirdPartyStandard"/>
+  <xs:complexType name="ThirdPartyStandard">
+    <xs:sequence>
+      <xs:element name="ThirdPartyName" type="RequiredString150"/>
+      <xs:element name="IdType" type="RequiredString150"/>
+      <xs:element name="Id" type="RequiredString150"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnversionedGlobalIdentifier" type="UnversionedGlobalIdentifier"/>
+  <xs:complexType name="UnversionedGlobalIdentifier">
+    <xs:annotation>
+      <xs:documentation>An identifier for a non-partitioned namespace that uniquely identifies a non-versioned resource.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="GlobalIdentifier">
+        <xs:sequence>
+          <xs:element name="Uri" type="xs:anyURI" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UnversionedPartitionedIdentifier" type="UnversionedPartitionedIdentifier"/>
+  <xs:complexType name="UnversionedPartitionedIdentifier">
+    <xs:annotation>
+      <xs:documentation>An identifier that uniquely identifies an non-versioned resource. Note that in a PartitionedIdentifier, the Id may only be unique within the scope of an Idspace.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="PartitionedIdentifier">
+        <xs:sequence>
+          <xs:element name="Uri" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>A URI that uniquely identifies the resource. Note that this field is typically derived from the other components that make up the identifier.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="User" type="User"/>
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element name="Role" type="RoleType"/>
+      <xs:element name="Id" type="xs:string"/>
+      <xs:element name="LastName" type="xs:string"/>
+      <xs:element name="FirstName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Users" type="Users"/>
+  <xs:complexType name="Users">
+    <xs:sequence>
+      <xs:element name="User" type="User" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VersionedGlobalIdentifier" type="VersionedGlobalIdentifier"/>
+  <xs:complexType name="VersionedGlobalIdentifier">
+    <xs:annotation>
+      <xs:documentation>An identifier for a non-partitioned namespace that uniquely identifies a versioned resource.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="GlobalIdentifier">
+        <xs:sequence>
+          <xs:element name="Version" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The version of the artifact.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Uri" type="xs:anyURI" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>A URI that uniquely identifies the resource. Note that this field is typically derived from the other components that make up the identifier.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="VersionedPartitionedIdentifier" type="VersionedPartitionedIdentifier"/>
+  <xs:complexType name="VersionedPartitionedIdentifier">
+    <xs:annotation>
+      <xs:documentation>An identifier that uniquely identifies a versioned resource. Note that in a PartitionedIdentifier, the Id may only be unique within the scope of an Idspace.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="PartitionedIdentifier">
+        <xs:sequence>
+          <xs:element name="Version" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>The version of the artifact.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Uri" type="xs:anyURI">
+            <xs:annotation>
+              <xs:documentation>A URI that uniquely identifies the resource. Note that this field is typically derived from the other components that make up the identifier.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ZynxReference" type="ZynxReference"/>
+  <xs:complexType name="ZynxReference">
+    <xs:annotation>
+      <xs:documentation>A Zynx Catalog term reference. Catalog terms may be either 'Custom' terms originating from an organization's catalog and imported into the Zynx Custom Catalog or 'Zynx Default' if it is a term from the Zynx Default Catalog.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Id" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>The PivotID for the term.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DisplayName" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The display name for the term as is defined in the catalog.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IsZynxTerm" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>When 'true', the term originates from the Zynx Default Catalog. When 'false', the term is a Zynx Custom Catalog term that originates from an organization's orderable catalog.</xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>

@@ -428,26 +428,13 @@ namespace Xsd2Code.TestUnit
                 generatorParams.EnableDataBinding = false;
                 generatorParams.Language = GenerationLanguage.CSharp;
                 generatorParams.NameSpace = "Cdss.Domain.Entities";
+                generatorParams.EnableInitializeFields = false;
 
                 var xsdGen = new GeneratorFacade(generatorParams);
 
                 var result = xsdGen.Generate();
 
                 Assert.IsTrue(result.Success, result.Messages.ToString());
-
-//                var genderRoot = new Root
-//                                     {
-//                                         GenderAttribute = ksgender.female,
-//                                         GenderAttributeSpecified = true,
-//                                         GenderElement = ksgender.female,
-//                                         GenderIntAttribute = "toto"
-//                                     };
-//                Exception ex;
-//                genderRoot.SaveToFile(Path.Combine(OutputFolder, "gender.xml"), out ex);
-//                if (ex != null) throw ex;
-
-//                var canCompile = CompileCSFile(generatorParams.OutputFilePath);
-//                Assert.IsTrue(canCompile.Success, canCompile.Messages.ToString());
             }
         }
 
