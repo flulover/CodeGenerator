@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xsd2Code.Extras", "Xsd2Code
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZynxCodeGenerator", "ZynxCodeGenerator\ZynxCodeGenerator.csproj", "{08703018-6347-4111-A06D-035D28F88462}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCodeGenerator", "TestCodeGenerator\TestCodeGenerator.csproj", "{D7B3414D-1C3F-46B9-A932-375A33531BE3}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Xsd2Code.vsmdi
@@ -56,6 +58,10 @@ Global
 		{08703018-6347-4111-A06D-035D28F88462}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08703018-6347-4111-A06D-035D28F88462}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08703018-6347-4111-A06D-035D28F88462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7B3414D-1C3F-46B9-A932-375A33531BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7B3414D-1C3F-46B9-A932-375A33531BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7B3414D-1C3F-46B9-A932-375A33531BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7B3414D-1C3F-46B9-A932-375A33531BE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

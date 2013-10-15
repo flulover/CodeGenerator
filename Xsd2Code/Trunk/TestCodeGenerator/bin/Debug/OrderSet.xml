@@ -1,0 +1,153 @@
+<OrderSet xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<TopLevelItems>
+		<TopLevelItem i:type="OrderSetSectionItem">
+			<Items>
+				<Item i:type="OrderableSentenceItem">
+					<OrderableReferences>
+						<ReferenceBinding>
+							<ExternalConceptReference>
+								<EnvironmentId>619</EnvironmentId>
+								<Idspace>client</Idspace>
+								<Id>Medication</Id>
+								<SecondaryKey>Medication</SecondaryKey>
+								<Uri>http://localhost/api/v1/catalog/env/619/orderables/client,Medication</Uri>
+							</ExternalConceptReference>
+							<AuthoringConceptReference>
+								<Id>11</Id>
+								<DisplayName>Medication</DisplayName>
+								<IsZynxTerm>false</IsZynxTerm>
+							</AuthoringConceptReference>
+						</ReferenceBinding>
+					</OrderableReferences>
+					<RelatedToMedications>true</RelatedToMedications>
+					<OrderDetail>
+						<DataTemplateReference>
+							<EnvironmentId>623</EnvironmentId>
+							<Idspace>MED</Idspace>
+							<Id>123</Id>
+						</DataTemplateReference>
+						<DataElementInstances>
+							<DataElementInstance i:type="BooleanDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1231</Id>
+								</DataElementReference>
+								<Value>true</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="DecimalDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<Value>100.0</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="IntegerDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<Value>100</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="TextDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<Value>As needed for pain</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="SingleSelectDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<EnumerationValueReferences>
+									<ReferenceBinding>
+										<ExternalConceptReference>
+											<EnvironmentId>623</EnvironmentId>
+											<Idspace>MED</Idspace>
+											<Id>5555</Id>
+										</ExternalConceptReference>
+									</ReferenceBinding>
+								</EnumerationValueReferences>
+							</DataElementInstance>
+						</DataElementInstances>
+					</OrderDetail>
+				</Item>
+				<Item i:type="OrderableSentenceItem">
+					<OrderableReferences>
+						<ReferenceBinding>
+							<AuthoringConceptReference>
+								<Id>12</Id>
+								<DisplayName>Orderable</DisplayName>
+								<IsZynxTerm>true</IsZynxTerm>
+							</AuthoringConceptReference>
+						</ReferenceBinding>
+					</OrderableReferences>
+					<RelatedToMedications>false</RelatedToMedications>
+					<OrderDetail>
+						<DataTemplateReference>
+							<EnvironmentId>623</EnvironmentId>
+							<Idspace>MED</Idspace>
+							<Id>123</Id>
+						</DataTemplateReference>
+						<DataElementInstances>
+							<DataElementInstance i:type="BooleanDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1231</Id>
+								</DataElementReference>
+								<Value>true</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="DecimalDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<Value>100.0</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="IntegerDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<Value>100</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="TextDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<Value>As needed for pain</Value>
+							</DataElementInstance>
+							<DataElementInstance i:type="SingleSelectDataElementInstance">
+								<DataElementReference>
+									<EnvironmentId>623</EnvironmentId>
+									<Idspace>MED</Idspace>
+									<Id>1232</Id>
+								</DataElementReference>
+								<EnumerationValueReferences>
+									<ReferenceBinding>
+										<ExternalConceptReference>
+											<EnvironmentId>623</EnvironmentId>
+											<Idspace>MED</Idspace>
+											<Id>5555</Id>
+										</ExternalConceptReference>
+									</ReferenceBinding>
+								</EnumerationValueReferences>
+							</DataElementInstance>
+						</DataElementInstances>
+					</OrderDetail>
+				</Item>
+			</Items>
+		</TopLevelItem>
+	</TopLevelItems>
+</OrderSet>
