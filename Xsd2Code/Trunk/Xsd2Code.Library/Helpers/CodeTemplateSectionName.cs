@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Xsd2Code.Library.Helpers
 {
-    class CodeTemplateSectionName
+    public class CodeTemplateSectionName
     {
         public const string ClassName = "[ClassName]";
         public const string Fields = "[Fields]";

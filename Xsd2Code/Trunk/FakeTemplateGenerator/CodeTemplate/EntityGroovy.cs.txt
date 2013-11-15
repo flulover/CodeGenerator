@@ -1,0 +1,8 @@
+﻿package common.entities.orderSet
+
+import common.entities.BaseEntityWithIgnorableFields
+
+class [ClassName] extends BaseEntityWithIgnorableFields{
+
+[Fields]
+}

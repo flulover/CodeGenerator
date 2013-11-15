@@ -80,7 +80,7 @@ namespace Xsd2Code.Library
         public Result<byte[]> GenerateBytes()
         {
             string outputFilePath = Path.GetTempFileName();
-            var processResult = this.Process(outputFilePath);
+            var processResult = this.Process();
 
             if (processResult.Success)
             {
@@ -108,7 +108,7 @@ namespace Xsd2Code.Library
         {
             GeneratorContext.GeneratorParams = generatorParams;
             var outputFileName = GeneratorContext.GeneratorParams.OutputFilePath;
-            var processResult = this.Process(outputFileName);
+            var processResult = this.Process();
             return new Result<string>(outputFileName, processResult.Success, processResult.Messages);
         }
 
@@ -119,7 +119,7 @@ namespace Xsd2Code.Library
         public Result<string> Generate()
         {
             var outputFileName = GeneratorContext.GeneratorParams.OutputFilePath;
-            var processResult = this.Process(outputFileName);
+            var processResult = this.Process();
             return new Result<string>(outputFileName, processResult.Success, processResult.Messages);
         }
 
@@ -141,14 +141,12 @@ namespace Xsd2Code.Library
             }
         }
 
-        
 
         /// <summary>
         /// Processes the specified file name.
         /// </summary>
-        /// <param name="outputFilePath">The output file path.</param>
         /// <returns>true if sucess else false</returns>
-        private Result Process(string outputFilePath)
+        private Result Process()
         {
             #region Change CurrentDir for include schema resolution.
 
@@ -163,7 +161,7 @@ namespace Xsd2Code.Library
                 return new Result(false, MessageType.Error, errorMessage);
             }
 
-            if (inputFile.Directory != null) Directory.SetCurrentDirectory(inputFile.Directory.FullName);
+            if (inputFile.Directory != null) Directory.SetCurrentDirectory(GeneratorContext.GeneratorParams.OutputFilePath);
 
             #endregion
 
@@ -177,12 +175,11 @@ namespace Xsd2Code.Library
                     GenerateEntityCSharpCode(result.Entity);
 
                     // Entity builder class
+
                     CodeNamespace ns = null;
                     XmlSchema xsd = null;
                     Generator.Process(GeneratorParams.InputFilePath, ref xsd, ref ns);
                     GenerateEntityBuilderCSharpCode(ns);
-                    GenerateEntityGroovyCode(ns);
-                    GenerateEntityBuilderGroovyCode(ns);
                 }
                 catch (Exception e)
                 {
@@ -206,67 +203,7 @@ namespace Xsd2Code.Library
             return new Result(true);
         }
 
-
-        private void GenerateEntityGroovyCode(CodeNamespace ns)
-        {
-            foreach (CodeTypeDeclaration type in ns.Types)
-            {
-                string literalCode = Resources.EntityGroovy_cs;
-                
-                using (var outputStream = new StreamWriter(type.Name + ".groovy", false))
-                {
-                    literalCode = literalCode.Replace(CodeTemplateSectionName.ClassName, type.Name);
-                    string fieldsCode = string.Empty;
-                    foreach (CodeTypeMember codeTypeMember in type.Members)
-                    {
-                        var prop = codeTypeMember as CodeMemberProperty;
-                        if (prop != null)
-                        {
-                            string fieldCode = Resources.EntityFieldGroovy_cs;
-                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldType, CSharpTypeToGroovyType.GetType(prop.Type.BaseType));
-                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldName, prop.Name);
-                            fieldsCode += fieldCode;
-                        }
-                    }
-
-                    literalCode = literalCode.Replace(CodeTemplateSectionName.Fields, fieldsCode);
-
-                    CodeSnippetCompileUnit cu = new CodeSnippetCompileUnit(literalCode);
-                    providerField.GenerateCodeFromCompileUnit(cu, outputStream, new CodeGeneratorOptions());
-                }
-            }
-        }
-
-        private void GenerateEntityBuilderGroovyCode(CodeNamespace ns)
-        {
-            foreach (CodeTypeDeclaration type in ns.Types)
-            {
-                string literalCode = Resources.EntityBuilderGroovy_cs;
-
-                using (var outputStream = new StreamWriter(type.Name + "Builder.groovy", false))
-                {
-                    literalCode = literalCode.Replace(CodeTemplateSectionName.ClassName, type.Name);
-                    string withFunctionCode = string.Empty;
-                    foreach (CodeTypeMember codeTypeMember in type.Members)
-                    {
-                        var prop = codeTypeMember as CodeMemberProperty;
-                        if (prop != null)
-                        {
-                            string fieldCode = Resources.EntityBuilderFunctionGroovy_cs;
-                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldType, CSharpTypeToGroovyType.GetType(prop.Type.BaseType));
-                            fieldCode = fieldCode.Replace(CodeTemplateSectionName.FieldName, prop.Name);
-                            withFunctionCode += fieldCode;
-                        }
-                    }
-
-                    literalCode = literalCode.Replace(CodeTemplateSectionName.FieldsFunction, withFunctionCode);
-
-                    CodeSnippetCompileUnit cu = new CodeSnippetCompileUnit(literalCode);
-                    providerField.GenerateCodeFromCompileUnit(cu, outputStream, new CodeGeneratorOptions());
-                }
-            }
-        }
-
+        
         private void GenerateEntityCSharpCode(CodeNamespace ns)
         {
             foreach (CodeTypeDeclaration type in ns.Types)

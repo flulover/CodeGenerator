@@ -120,7 +120,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs">
+    <Compile Include="Extensions\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CodeBase.cs" />

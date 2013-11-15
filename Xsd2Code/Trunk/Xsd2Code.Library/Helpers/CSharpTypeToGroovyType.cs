@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Xsd2Code.Library.Helpers
 {
-    class CSharpTypeToGroovyType
+    public class CSharpTypeToGroovyType
     {
         // key:     C# type 
         // value:   Groovy type

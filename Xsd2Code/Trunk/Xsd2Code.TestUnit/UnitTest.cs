@@ -257,7 +257,7 @@ namespace Xsd2Code.TestUnit
                 var dvd = new DvdCollection();
                 dvd.Dvds.Add(new dvd { Title = "Matrix éà?" });
                 var newitem = new dvd();
-                newitem.Actor.Add(new Actor { firstname = "Jamés à&", nationality = "Us" });
+                newitem.Actor.Add(new Actor { firstname = "Jamés ?", nationality = "Us" });
                 dvd.Dvds.Add(newitem);
                 var originalXml = dvd.Serialize();
                 dvd.SaveToFile(@"c:\temp\dvd.xml");
