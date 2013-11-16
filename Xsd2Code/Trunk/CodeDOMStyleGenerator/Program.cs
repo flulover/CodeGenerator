@@ -7,6 +7,14 @@ namespace CodeDOMStyleGenerator
         static void Main(string[] args)
         {
             const string inputFilePath = @"C:\CodeGeneration\ZynxWebAPI.xsd";
+            var generatorParams = GeneratorParams(inputFilePath);
+            var xsdGen = new GeneratorFacade(generatorParams);
+            
+            xsdGen.Generate();
+        }
+
+        private static GeneratorParams GeneratorParams(string inputFilePath)
+        {
             var generatorParams = GetGeneratorParams(inputFilePath);
             generatorParams.TargetFramework = TargetFramework.Net40;
             generatorParams.PropertyParams.AutomaticProperties = true;
@@ -24,11 +32,7 @@ namespace CodeDOMStyleGenerator
             generatorParams.Language = GenerationLanguage.CSharp;
             generatorParams.NameSpace = "Cdss.Domain.Entities";
             generatorParams.EnableInitializeFields = false;
-           
-            var xsdGen = new GeneratorFacade(generatorParams);
-
-            xsdGen.Generate();
-
+            return generatorParams;
         }
 
         private static GeneratorParams GetGeneratorParams(string inputFilePath)

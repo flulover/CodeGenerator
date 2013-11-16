@@ -7,12 +7,6 @@ namespace TestCodeGenerator
 {
     class Program
     {
-        class TagName
-        {
-            public static readonly string NodeName = "[NodeName]";
-            public static readonly string WithFunctions = "[WithFunction]";
-        }
-
         private static readonly string XmlBuilderCodeFormat = "new {0}Builder()\n" + "{1}";
         private static readonly string XmlBuilderFuctionCodeFormat = "\t.with{0}({1})\n";
 

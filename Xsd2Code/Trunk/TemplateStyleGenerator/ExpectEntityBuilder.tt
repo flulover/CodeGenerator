@@ -1,0 +1,45 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml" #>
+<#@ output extension=".groovy" #>
+<#@ assembly name="$(TargetPath)" #>
+<#@ import namespace="TemplateStyleGenerator" #>
+
+<#
+	XmlDocument doc = new XmlDocument();
+    doc.Load(@"C:\Code\xsd2code-99803\Xsd2Code\Trunk\TemplateStyleGenerator\bin\Debug\OrderSet.xml");
+	
+    var xmlHelper = new ZynxXmlNodeHelper();
+    var nodeList = xmlHelper.GetXmlNodeList(doc.FirstChild);
+
+    foreach (XmlNode node in nodeList)
+    {
+        if (ZynxXmlNodeHelper.ShouldGeneratorVarible(node))
+        {
+#>
+
+def <#= xmlHelper.GetDeclarationVaribleName(xmlHelper.GetActualNodeName(node)) #> = new <#= xmlHelper.GetActualNodeName(node) #>Builder()
+<#
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                if (ZynxXmlNodeHelper.ShouldGeneratorVarible(childNode))
+                {
+#>
+        .with<#= xmlHelper.GetActualNodeName(childNode) #>(<#= xmlHelper.GetUsageVaribleName(xmlHelper.GetActualNodeName(childNode)) #>)
+<#
+                }
+                else
+                {
+#>
+        .with<#= xmlHelper.GetActualNodeName(childNode) #>("<#= childNode.FirstChild.Value #>")
+<#
+                }
+            }
+        }
+    }
+#>

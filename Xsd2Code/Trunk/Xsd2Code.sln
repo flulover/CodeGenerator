@@ -1,21 +1,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9908FD4-95AF-43DF-A6E3-C4A85F37EDCC}"
-	ProjectSection(SolutionItems) = preProject
-		Xsd2Code.vsmdi = Xsd2Code.vsmdi
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xsd2Code.Library", "Xsd2Code.Library\Xsd2Code.Library.csproj", "{1B59FB12-699C-4927-ACA3-D7F0E0F79100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xsd2Code.TestUnit", "Xsd2Code.TestUnit\Xsd2Code.TestUnit.csproj", "{76D1A3F3-DBA4-4236-B882-52031598757A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeTemplateGroovyTestCodeGenerator", "TestCodeGenerator\FakeTemplateGroovyTestCodeGenerator.csproj", "{D7B3414D-1C3F-46B9-A932-375A33531BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCodeGenerator", "TestCodeGenerator\TestCodeGenerator.csproj", "{D7B3414D-1C3F-46B9-A932-375A33531BE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeDOMStyleCSharpCodeGenerator", "CodeDOMStyleGenerator\CodeDOMStyleCSharpCodeGenerator.csproj", "{11451823-53C2-4F7F-8E59-E7B84EC6AC8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeDOMStyleGenerator", "CodeDOMStyleGenerator\CodeDOMStyleGenerator.csproj", "{11451823-53C2-4F7F-8E59-E7B84EC6AC8F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeTemplateStyleGenerator", "FakeTemplateGenerator\FakeTemplateStyleGenerator.csproj", "{AC3D8C3A-1EEE-4443-ABF4-6C0CDEF72290}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeTemplateGroovyCodeGenerator", "FakeTemplateGenerator\FakeTemplateGroovyCodeGenerator.csproj", "{AC3D8C3A-1EEE-4443-ABF4-6C0CDEF72290}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateStyleGenerator", "TemplateStyleGenerator\TemplateStyleGenerator.csproj", "{34FEE8D6-0911-454E-BC8A-55C8DEC3E8C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeDOMGenerator", "CodeDOMGenerator", "{1C7977C8-C8CF-4EB6-A094-1F1BCDD893D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FakeTemplateGenerator", "FakeTemplateGenerator", "{72DDBE79-D77F-4F47-A089-00DA78BD2DE7}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -30,10 +27,6 @@ Global
 		{1B59FB12-699C-4927-ACA3-D7F0E0F79100}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B59FB12-699C-4927-ACA3-D7F0E0F79100}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B59FB12-699C-4927-ACA3-D7F0E0F79100}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76D1A3F3-DBA4-4236-B882-52031598757A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76D1A3F3-DBA4-4236-B882-52031598757A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76D1A3F3-DBA4-4236-B882-52031598757A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76D1A3F3-DBA4-4236-B882-52031598757A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7B3414D-1C3F-46B9-A932-375A33531BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7B3414D-1C3F-46B9-A932-375A33531BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7B3414D-1C3F-46B9-A932-375A33531BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,5 +46,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1B59FB12-699C-4927-ACA3-D7F0E0F79100} = {1C7977C8-C8CF-4EB6-A094-1F1BCDD893D0}
+		{11451823-53C2-4F7F-8E59-E7B84EC6AC8F} = {1C7977C8-C8CF-4EB6-A094-1F1BCDD893D0}
+		{AC3D8C3A-1EEE-4443-ABF4-6C0CDEF72290} = {72DDBE79-D77F-4F47-A089-00DA78BD2DE7}
+		{D7B3414D-1C3F-46B9-A932-375A33531BE3} = {72DDBE79-D77F-4F47-A089-00DA78BD2DE7}
 	EndGlobalSection
 EndGlobal
